@@ -1,11 +1,11 @@
 <template>
     <tabs-layout :tabs="tabs">
         <div slot="employer">
-            employer content
+            <negotiation-panel title="Employer" inputLabel="enter max" />
         </div>
 
         <div slot="employee">
-            employee content
+            <negotiation-panel title="Employee" inputLabel="enter min" />
         </div>
     </tabs-layout>
 </template>
@@ -13,11 +13,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import TabsLayout from '@/ui/TabsLayout.vue';
+import NegotiationPanel from '@/ui/NegotiationPanel.vue';
 
 export default Vue.extend({
     name: 'App',
     components: {
         TabsLayout,
+        NegotiationPanel,
     },
     data() {
         return {
