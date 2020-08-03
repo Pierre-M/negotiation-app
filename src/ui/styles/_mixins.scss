@@ -1,0 +1,10 @@
+@mixin mainTitle() {
+    font-family: $ft_main-title;
+    font-weight: 600;
+    font-size: $fs_huge;
+}
+
+@mixin size($w, $h: $w) {
+    width: $w;
+    height: $h;
+}
