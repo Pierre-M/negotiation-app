@@ -1,18 +1,8 @@
 <template>
     <div>
         <tabs-layout v-if="ready" :tabs="tabs">
-            <negotiation-panel
-                slot="employer"
-                title="Enter the maximum amount you're willing to pay"
-                inputLabel="Enter the maximum amount you're willing to pay"
-                @submit="handleEmployerSubmission"
-            />
-            <negotiation-panel
-                slot="employee"
-                title="Employee negotiation"
-                inputLabel="Enter the minimum salary you want"
-                @submit="handleEmployeeSubmission"
-            />
+            <negotiation-panel slot="employer" :title="$t('app.negotiation.panel.title.employer')" @submit="handleEmployerSubmission" />
+            <negotiation-panel slot="employee" :title="$t('app.negotiation.panel.title.employee')" @submit="handleEmployeeSubmission" />
         </tabs-layout>
 
         <negotiation-result-modal
@@ -33,6 +23,7 @@ import NegotiationResultModal from '@/ui/NegotiationResultModal.vue';
 import { useComponentRendering } from '@/ui/useComponentRendering';
 import { useNegotiation } from '@/ui/useNegotiation';
 import { useNegotiationValues } from '@/ui/useNegotiationValues';
+import { Tab } from '@/ui/tabs';
 
 export default defineComponent({
     name: 'NegotiationWidget',
@@ -63,11 +54,11 @@ export default defineComponent({
         const tabs: Tab[] = [
             {
                 id: 'employer',
-                label: 'Employeur',
+                label: root.$t('app.negotiation.panel.label.employer'),
             },
             {
                 id: 'employee',
-                label: 'Employee',
+                label: root.$t('app.negotiation.panel.label.employee'),
             },
         ];
 

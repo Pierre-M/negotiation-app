@@ -2,6 +2,7 @@ import TabsLayout from '@/ui/TabsLayout.vue';
 import { prepareComponent } from '../_utils';
 import { Wrapper } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
+import { Tab } from '@/ui/tabs';
 
 const FAKE_TABS: Tab[] = [
     {

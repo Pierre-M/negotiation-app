@@ -1,0 +1,15 @@
+{
+    "app.footer.content": "Made with \uD83D\uDC9A & Vue.js",
+    "app.main.title": "\uD83D\uDCB8 Negotiation app",
+    "app.negotiation.panel.input.label": "Salary",
+    "app.negotiation.panel.label.employee": "Employee",
+    "app.negotiation.panel.label.employer": "Employer",
+    "app.negotiation.panel.submit.label": "Confirm",
+    "app.negotiation.panel.title.employee": "How much do you expect to be paid minimally?",
+    "app.negotiation.panel.title.employer": "Enter the maximum amount you're willing to pay",
+    "app.negotiation.result.modal.recap": "Minimum required salary was {0}€ and maximum willing to be given was {1}€",
+    "app.negotiation.result.modal.temperature.label": "Oh and by the way, since you asked for, here is the temperature in London right now:",
+    "app.negotiation.result.modal.close.label": "Ok, 'got it!",
+    "app.negotiation.result.modal.title.success": "\uD83D\uDC4D Negotiation succeeded!",
+    "app.negotiation.result.modal.title.failure": "\uD83D\uDC4E Negotiation failed"
+}

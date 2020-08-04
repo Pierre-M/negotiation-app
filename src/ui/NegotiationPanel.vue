@@ -6,11 +6,13 @@
 
         <form @submit="submit">
             <label v-show="!submitted">
-                <span class="negotiation-panel__label">salary</span>
+                <span class="negotiation-panel__label">{{ $t('app.negotiation.panel.input.label') }}</span>
                 <input ref="inputEl" class="negotiation-panel__input" type="number" v-model="inputValue" />
             </label>
 
-            <btn class="negotiation-panel__submit" type="submit" :disabled="!allowedToSubmit">Confirm</btn>
+            <btn class="negotiation-panel__submit" type="submit" :disabled="!allowedToSubmit">
+                {{ $t('app.negotiation.panel.submit.label') }}
+            </btn>
         </form>
     </section>
 </template>
@@ -24,10 +26,6 @@ export default defineComponent({
     components: { Btn },
     props: {
         title: {
-            type: String,
-            required: true,
-        },
-        inputLabel: {
             type: String,
             required: true,
         },

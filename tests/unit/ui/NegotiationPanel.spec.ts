@@ -1,13 +1,14 @@
 import NegotiationPanel from '@/ui/NegotiationPanel.vue';
-import { shallowMount, Wrapper } from '@vue/test-utils';
+import { Wrapper } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import Btn from '@/ui/Btn.vue';
+import { prepareComponent } from '../_utils';
 
 let wrapper: Wrapper<any>;
 
 describe('NegotiationPanel', () => {
     beforeEach(() => {
-        wrapper = shallowMount(NegotiationPanel, {
+        wrapper = prepareComponent(NegotiationPanel, {
             propsData: {
                 title: 'Test',
                 inputLabel: 'toto',

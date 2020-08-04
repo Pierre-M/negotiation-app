@@ -18,14 +18,7 @@
         </ul>
         <div aria-hidden="true" class="tabs-layout__marker" />
 
-        <div
-            class="tabs-layout__content"
-            :key="activeTab.id"
-            :id="activeTab.id"
-            :tabindex="0"
-            role="tabpanel"
-            :aria-labelledby="`tab_${activeTab.id}`"
-        >
+        <div class="tabs-layout__content" :key="activeTab.id" :id="activeTab.id" role="tabpanel" :aria-labelledby="`tab_${activeTab.id}`">
             <slot :name="activeTab.id" />
         </div>
     </div>
@@ -33,6 +26,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, Ref } from '@vue/composition-api';
+import { Tab } from '@/ui/tabs';
 
 export default defineComponent({
     name: 'TabsLayout',

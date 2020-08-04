@@ -8,19 +8,19 @@
             <div v-show="opened" class="negotiation-result-modal">
                 <div class="negotiation-result-modal__content">
                     <h2 class="negotiation-result-modal__title">{{ title }}</h2>
-                    <p>Minimum required salary was {{ min }}€ and maximum willing to be given was {{ max }}€</p>
+                    <p>{{ $t('app.negotiation.result.modal.recap', [min, max]) }}</p>
 
                     <fade-transition>
                         <div v-if="currentTemperature">
                             <hr class="negotiation-result-modal__separator" />
                             <p>
-                                Oh and by the way, since you asked for, here is the temperature in London right now:
+                                {{ $t('app.negotiation.result.modal.temperature.label') }}
                                 <strong class="negotiation-result-modal__temperature-result">{{ currentTemperature }}°</strong>
                             </p>
                         </div>
                     </fade-transition>
 
-                    <btn @click="$emit('closed')">Ok, got it!</btn>
+                    <btn @click="$emit('closed')">{{ $t('app.negotiation.result.modal.close.label') }}</btn>
                 </div>
             </div>
         </slide-y-up-transition>
@@ -46,15 +46,15 @@ export default defineComponent({
         min: {},
         max: {},
     },
-    setup(props: { status: NegotiationStatus; min: number; max: number }) {
+    setup(props: { status: NegotiationStatus; min: number; max: number }, { root }) {
         const { currentTemperature } = useCurrentWeather('London');
         const title = computed(() => {
             if (props.status === NegotiationStatus.FAILURE) {
-                return '👎 Negotiation failed';
+                return root.$t('app.negotiation.result.modal.title.failure');
             }
 
             if (props.status === NegotiationStatus.SUCCESS) {
-                return '👍 Negotiation succeeded !';
+                return root.$t('app.negotiation.result.modal.title.success');
             }
         });
 

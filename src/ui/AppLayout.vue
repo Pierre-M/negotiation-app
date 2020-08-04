@@ -1,10 +1,10 @@
 <template>
     <div class="app-layout">
         <main class="app-layout__content">
-            <h1 class="app-layout__title">💸 Negociation app</h1>
+            <h1 class="app-layout__title">{{ $t('app.main.title') }}</h1>
             <slot />
         </main>
-        <footer class="app-layout__footer">Made with 💚 and Vue.js</footer>
+        <footer class="app-layout__footer">{{ $t('app.footer.content') }}</footer>
     </div>
 </template>
 

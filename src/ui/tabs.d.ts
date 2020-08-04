@@ -1,4 +1,6 @@
+import { TranslateResult } from 'vue-i18n';
+
 interface Tab {
-    label: string;
+    label: TranslateResult;
     id: string;
 }

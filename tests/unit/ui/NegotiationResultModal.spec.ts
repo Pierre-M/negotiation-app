@@ -1,16 +1,17 @@
 import NegotiationResultModal from '@/ui/NegotiationResultModal.vue';
-import { shallowMount, Wrapper } from '@vue/test-utils';
+import { Wrapper } from '@vue/test-utils';
 import { WEATHER_SERVICE_KEY } from '@/services/WeatherService';
 import { mockedWeatherService } from '../_mocks/MockedWeatherService';
 import flushPromises from 'flush-promises';
 import Btn from '@/ui/Btn.vue';
+import { prepareComponent } from '../_utils';
 
 describe('NegotiationResultModal', () => {
     let wrapper: Wrapper<any>;
 
     beforeEach(async () => {
         mockedWeatherService.getCurrentTemperatureInDegreeByCity.mockResolvedValueOnce(25);
-        wrapper = shallowMount(NegotiationResultModal, {
+        wrapper = prepareComponent(NegotiationResultModal, {
             provide: {
                 [WEATHER_SERVICE_KEY]: mockedWeatherService,
             },
