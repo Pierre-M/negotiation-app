@@ -40,7 +40,7 @@ $app-layout-footer-height: 30px;
         align-items: center;
         justify-content: center;
         font-size: $fs_xs;
-        border-top: 1px solid transparentize(#000, 0.9);
+        border-top: 1px solid $c_bd;
     }
 }
 </style>

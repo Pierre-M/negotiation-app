@@ -1,6 +1,7 @@
 import NegotiationPanel from '@/ui/NegotiationPanel.vue';
 import { shallowMount, Wrapper } from '@vue/test-utils';
-import flushPromises from "flush-promises";
+import flushPromises from 'flush-promises';
+import Btn from '@/ui/Btn.vue';
 
 let wrapper: Wrapper<any>;
 
@@ -23,7 +24,7 @@ describe('NegotiationPanel', () => {
         });
 
         it('should not allow submission', () => {
-            expect(wrapper.find('button[type="submit"]').element).toBeDisabled();
+            expect(wrapper.findComponent(Btn).attributes().disabled).toBe('true');
         });
     });
 
@@ -31,7 +32,7 @@ describe('NegotiationPanel', () => {
         wrapper.find('input').setValue(10);
         await flushPromises();
 
-        expect(wrapper.find('button').element).not.toBeDisabled();
+        expect(wrapper.findComponent(Btn).attributes().disabled).toBe(undefined);
     });
 
     it('should not emit submit event when input value is null', () => {
@@ -68,6 +69,6 @@ describe('NegotiationPanel', () => {
 
         await flushPromises();
 
-        expect(wrapper.find('button[type="submit"]').element).toBeDisabled();
+        expect(wrapper.findComponent(Btn).attributes().disabled).toBe('true');
     });
 });

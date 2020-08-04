@@ -28,5 +28,6 @@ body {
 
 body {
     font-family: $ft__main;
+    background-color: $c_bg;
 }
 </style>

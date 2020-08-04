@@ -2,7 +2,7 @@
     <tabs-layout :tabs="tabs">
         <negotiation-panel
             slot="employer"
-            title="Employer negotiation"
+            title="Enter the maximum amount you're willing to pay"
             inputLabel="Enter the maximum amount you're willing to pay"
             @submit="handleEmployerSubmission"
         />
@@ -67,5 +67,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style lang="stylus"></style>
