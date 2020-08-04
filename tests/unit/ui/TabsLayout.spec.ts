@@ -58,10 +58,7 @@ describe('TabsLayout', () => {
 
 const expectActiveTabToBe = (tabIdx: number) => {
     const tab = wrapper.findAll('[role="tab"]').at(tabIdx);
-    const tabContent = wrapper.findAll('[role="tabpanel"]').at(tabIdx);
-    const OTHER_TAB_INDICES = Object.keys(FAKE_TABS)
-        .map(k => parseInt(k, 10))
-        .filter(k => k !== tabIdx);
+    const tabContent = wrapper.find(`#${FAKE_TABS[tabIdx].id}`);
 
     expect(tab.attributes()).toMatchObject({
         tabindex: '0',
@@ -69,12 +66,4 @@ const expectActiveTabToBe = (tabIdx: number) => {
     });
 
     expect(tabContent.element).toBeVisible();
-
-    OTHER_TAB_INDICES.forEach(idx => {
-        expect(wrapper.findAll('[role="tab"]').at(idx).attributes()).toMatchObject({
-            tabindex: '-1',
-        });
-
-        expect(wrapper.find(`#${FAKE_TABS[idx].id}`).element).not.toBeVisible();
-    });
 };

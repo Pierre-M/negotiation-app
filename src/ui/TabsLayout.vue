@@ -20,21 +20,19 @@
 
         <div
             class="tabs-layout__content"
-            v-for="(tab, idx) in tabs"
-            v-show="isTabActive(idx)"
-            :key="tab.id"
-            :id="tab.id"
+            :key="activeTab.id"
+            :id="activeTab.id"
             :tabindex="0"
             role="tabpanel"
-            :aria-labelledby="`tab_${tab.id}`"
+            :aria-labelledby="`tab_${activeTab.id}`"
         >
-            <slot :name="tab.id" />
+            <slot :name="activeTab.id" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from '@vue/composition-api';
+import { computed, defineComponent, ref, Ref } from '@vue/composition-api';
 
 export default defineComponent({
     name: 'TabsLayout',
@@ -44,16 +42,20 @@ export default defineComponent({
             default: () => [],
         },
     },
-    setup() {
+    setup(props: { tabs: Tab[] }) {
         const activeTabIdx: Ref<number> = ref(0);
         const isTabActive = (tabIdx: number): boolean => {
             return activeTabIdx.value === tabIdx;
         };
         const setTabActive = (idx: number) => (activeTabIdx.value = idx);
+        const activeTab = computed<Tab>(() => {
+            return props.tabs[activeTabIdx.value];
+        });
 
         return {
             isTabActive,
             setTabActive,
+            activeTab,
         };
     },
 });

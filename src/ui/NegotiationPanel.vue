@@ -7,7 +7,7 @@
         <form @submit="submit">
             <label v-show="!submitted">
                 <span class="negotiation-panel__label">salary</span>
-                <input class="negotiation-panel__input" type="number" v-model="inputValue" />
+                <input ref="inputEl" class="negotiation-panel__input" type="number" v-model="inputValue" />
             </label>
 
             <btn class="negotiation-panel__submit" type="submit" :disabled="!allowedToSubmit">Confirm</btn>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from '@vue/composition-api';
+import { computed, defineComponent, onMounted, ref } from '@vue/composition-api';
 import Btn from '@/ui/Btn.vue';
 
 export default defineComponent({
@@ -33,6 +33,7 @@ export default defineComponent({
         },
     },
     setup(props, { emit }) {
+        const inputEl = ref<HTMLElement | null>(null);
         const inputValue = ref<string | null>(null);
         const submit = (e: Event) => {
             e.preventDefault();
@@ -46,8 +47,18 @@ export default defineComponent({
         };
         const submitted = ref<boolean>(false);
         const allowedToSubmit = computed<boolean>(() => inputValue.value !== null && !submitted.value);
+        const focusField = () => {
+            if (!inputEl.value) {
+                return;
+            }
+
+            inputEl.value.focus();
+        };
+
+        onMounted(focusField);
 
         return {
+            inputEl,
             inputValue,
             allowedToSubmit,
             submit,
