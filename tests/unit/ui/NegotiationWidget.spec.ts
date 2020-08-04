@@ -1,7 +1,7 @@
 import NegotiationWidget from '@/ui/NegotiationWidget.vue';
 import { prepareComponent } from '../_utils';
 import { Wrapper } from '@vue/test-utils';
-import { NegotiationServiceKey } from '@/services/NegotiationService';
+import { NEGOTIATION_SERVICE_KEY } from '@/services/NegotiationService';
 import { mockedNegotiationService } from '../_mocks/MockedNegotiationService';
 import NegotiationPanel from '@/ui/NegotiationPanel.vue';
 import flushPromises from 'flush-promises';
@@ -14,7 +14,7 @@ describe('NegotiationWidget', () => {
     beforeEach(() => {
         wrapper = prepareComponent(NegotiationWidget, {
             provide: {
-                [NegotiationServiceKey]: mockedNegotiationService,
+                [NEGOTIATION_SERVICE_KEY]: mockedNegotiationService,
             },
         });
         employerPanel = wrapper.findAllComponents(NegotiationPanel).at(0);

@@ -1,7 +1,7 @@
 import TabsLayout from '@/ui/TabsLayout.vue';
 import { prepareComponent } from '../_utils';
 import { Wrapper } from '@vue/test-utils';
-import flushPromises from "flush-promises";
+import flushPromises from 'flush-promises';
 
 const FAKE_TABS: Tab[] = [
     {
@@ -41,19 +41,13 @@ describe('TabsLayout', () => {
 
     describe('Tab change upon click', () => {
         it('should change active tab upon click on it', async () => {
-            wrapper
-                .findAll('[role="tab"]')
-                .at(1)
-                .trigger('click');
+            wrapper.findAll('[role="tab"]').at(1).trigger('click');
 
             await wrapper.vm.$nextTick();
 
             expectActiveTabToBe(1);
 
-            wrapper
-                .findAll('[role="tab"]')
-                .at(2)
-                .trigger('click');
+            wrapper.findAll('[role="tab"]').at(2).trigger('click');
 
             await flushPromises();
 
@@ -77,12 +71,7 @@ const expectActiveTabToBe = (tabIdx: number) => {
     expect(tabContent.element).toBeVisible();
 
     OTHER_TAB_INDICES.forEach(idx => {
-        expect(
-            wrapper
-                .findAll('[role="tab"]')
-                .at(idx)
-                .attributes()
-        ).toMatchObject({
+        expect(wrapper.findAll('[role="tab"]').at(idx).attributes()).toMatchObject({
             tabindex: '-1',
         });
 

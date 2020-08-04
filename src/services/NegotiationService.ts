@@ -7,7 +7,7 @@ export interface NegotiationServiceResponse {
     status: NegotiationStatus;
 }
 
-export const NegotiationServiceKey = Symbol();
+export const NEGOTIATION_SERVICE_KEY = Symbol();
 
 export class NegotiationService {
     execute({ max, min }: { max: number; min: number }): NegotiationServiceResponse {
