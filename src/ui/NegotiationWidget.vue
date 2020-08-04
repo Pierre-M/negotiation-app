@@ -1,68 +1,89 @@
 <template>
-    <tabs-layout :tabs="tabs">
-        <negotiation-panel
-            slot="employer"
-            title="Enter the maximum amount you're willing to pay"
-            inputLabel="Enter the maximum amount you're willing to pay"
-            @submit="handleEmployerSubmission"
+    <div>
+        <tabs-layout v-if="ready" :tabs="tabs">
+            <negotiation-panel
+                slot="employer"
+                title="Enter the maximum amount you're willing to pay"
+                inputLabel="Enter the maximum amount you're willing to pay"
+                @submit="handleEmployerSubmission"
+            />
+            <negotiation-panel
+                slot="employee"
+                title="Employee negotiation"
+                inputLabel="Enter the minimum salary you want"
+                @submit="handleEmployeeSubmission"
+            />
+        </tabs-layout>
+
+        <negotiation-result-modal
+            :opened="showResultModal"
+            :status="status"
+            :max="employerMaxSalary"
+            :min="employeeTargetSalary"
+            @closed="handleNegotiationModalClosing"
         />
-        <negotiation-panel
-            slot="employee"
-            title="Employee negotiation"
-            inputLabel="Enter the minimum salary you want"
-            @submit="handleEmployeeSubmission"
-        />
-    </tabs-layout>
+    </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from '@vue/composition-api';
+import { defineComponent, ref } from '@vue/composition-api';
 import TabsLayout from '@/ui/TabsLayout.vue';
 import NegotiationPanel from '@/ui/NegotiationPanel.vue';
-import { NegotiationService, NegotiationServiceKey } from '@/services/NegotiationService';
-
-const tabs: Tab[] = [
-    {
-        id: 'employer',
-        label: 'Employeur',
-    },
-    {
-        id: 'employee',
-        label: 'Employee',
-    },
-];
+import NegotiationResultModal from '@/ui/NegotiationResultModal.vue';
+import { useComponentRendering } from '@/ui/useComponentRendering';
+import { useNegotiation } from '@/ui/useNegotiation';
+import { useNegotiationValues } from '@/ui/useNegotiationValues';
 
 export default defineComponent({
     name: 'NegotiationWidget',
-    components: { TabsLayout, NegotiationPanel },
-    props: {},
-    setup(props, { emit }) {
-        const negotiationService = inject<NegotiationService>(NegotiationServiceKey, new NegotiationService());
-        const employeeTargetSalary = ref<number | null>(null);
-        const employerMaxSalary = ref<number | null>(null);
-        const handleEmployerSubmission = (val: number) => (employerMaxSalary.value = val);
-        const handleEmployeeSubmission = (val: number) => (employeeTargetSalary.value = val);
-        const handleNegotiation = (min: number, max: number) => {
-            const { status } = negotiationService.execute({ min, max });
-            emit('negotiated', {
-                status,
-                min,
-                max,
-            });
+    components: { TabsLayout, NegotiationPanel, NegotiationResultModal },
+    setup(props, { root }) {
+        const { ready, rerender } = useComponentRendering(root.$nextTick);
+        const { employeeTargetSalary, employerMaxSalary, handleEmployerSubmission, handleEmployeeSubmission } = useNegotiationValues();
+        const { status } = useNegotiation({
+            min: employeeTargetSalary,
+            max: employerMaxSalary,
+            onNegotiationDone: () => (showResultModal.value = true),
+        });
+
+        const showResultModal = ref<boolean>(false);
+
+        const handleNegotiationModalClosing = async () => {
+            resetState();
+            await rerender();
         };
 
-        watch([employeeTargetSalary, employerMaxSalary], () => {
-            if (employerMaxSalary.value === null || employeeTargetSalary.value === null) {
-                return;
-            }
+        const resetState = () => {
+            status.value = null;
+            employerMaxSalary.value = null;
+            employeeTargetSalary.value = null;
+            showResultModal.value = false;
+        };
 
-            handleNegotiation(employeeTargetSalary.value, employerMaxSalary.value);
-        });
+        const tabs: Tab[] = [
+            {
+                id: 'employer',
+                label: 'Employeur',
+            },
+            {
+                id: 'employee',
+                label: 'Employee',
+            },
+        ];
 
         return {
             tabs,
+            ready,
+
+            employeeTargetSalary,
+            employerMaxSalary,
             handleEmployerSubmission,
             handleEmployeeSubmission,
+
+            status,
+
+            showResultModal,
+            handleNegotiationModalClosing,
         };
     },
 });
