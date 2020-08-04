@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueCompositionApi from '@vue/composition-api';
+import VScrollLock from 'v-scroll-lock';
 import { NegotiationService, NEGOTIATION_SERVICE_KEY } from '@/services/NegotiationService';
 import { WEATHER_SERVICE_KEY, WeatherService } from '@/services/WeatherService';
 
 Vue.config.productionTip = false;
 Vue.use(VueCompositionApi);
+Vue.use(VScrollLock);
 
 new Vue({
     render: h => h(App),

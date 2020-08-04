@@ -17,7 +17,9 @@
     "core-js": "^3.6.5",
     "flush-promises": "^1.0.2",
     "reset-css": "^5.0.1",
-    "vue": "^2.6.11"
+    "v-scroll-lock": "^1.2.0",
+    "vue": "^2.6.11",
+    "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.8",
