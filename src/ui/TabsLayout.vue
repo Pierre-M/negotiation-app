@@ -55,10 +55,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .tabs-layout {
     min-width: 800px;
-    box-shadow: 0 0 15px transparentize(#000, 0.8);
+    box-shadow: 0 0 15px transparentize($black, 0.8);
     background-color: $white;
     @include radius;
     overflow: hidden;

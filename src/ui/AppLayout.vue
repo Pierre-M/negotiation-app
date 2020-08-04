@@ -16,7 +16,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $app-layout-footer-height: 30px;
 .app-layout {
     display: grid;

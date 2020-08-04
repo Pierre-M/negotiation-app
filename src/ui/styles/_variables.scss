@@ -6,17 +6,10 @@ $fs_l: 20px;
 $fs_m: 16px;
 $fs_xs: 10px;
 
-$c_bd: transparentize(#000, .9);
-$radius: 10px;
-
-
+$white: #ffffffff;
+$black: #000;
+$c_bd: transparentize($black, .9);
 $c_bg: #e6e8e6ff;
-$c_bg--light: #e6e8e6ff;
 $c_primary: #191919ff;
 
-
-$red-orange-color-wheel: #f15025ff;
-$white: #ffffffff;
-$platinum: #e6e8e6ff;
-$light-gray: #ced0ceff;
-$eerie-black: #191919ff;
+$radius: 10px;

@@ -66,7 +66,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .negotiation-result-modal {
     position: fixed;
     z-index: 101;
@@ -92,7 +92,7 @@ export default defineComponent({
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: transparentize(#000, 0.8);
+        background-color: transparentize($black, 0.8);
         backdrop-filter: blur(10px);
     }
 

@@ -13,7 +13,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn {
     padding: 10px 20px;
     background-color: $c_primary;
